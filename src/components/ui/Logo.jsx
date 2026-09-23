@@ -62,7 +62,7 @@ export default function Logo({
       <Link
         to={to}
         aria-label="Go to homepage"
-        className="inline-flex items-center justify-center rounded-full hover:scale-105 active:scale-95 transition-transform duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]"
+        className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full hover:scale-105 active:scale-95 transition-transform duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]"
       >
         {svgElement}
       </Link>
