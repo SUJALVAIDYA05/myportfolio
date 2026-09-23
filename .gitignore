@@ -25,3 +25,10 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Local spec documentation (do not track on GitHub)
+animations.md
+backend.md
+content.md
+design.md
+folder-structure.md
