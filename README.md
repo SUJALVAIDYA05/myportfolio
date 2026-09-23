@@ -24,8 +24,8 @@ Opens at [http://localhost:5173](http://localhost:5173).
 ```bash
 cd server
 npm install
-cp .env.example .env   # fill in your email/API keys
-npm run dev
+cp .env.example .env   # fill in your email/API keys (or leave blank to test in dev mode)
+npm start              # starts the Express server on port 4000 (or 'npm run dev' with watch mode)
 ```
 
 Runs at [http://localhost:4000](http://localhost:4000).
