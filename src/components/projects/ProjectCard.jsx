@@ -5,7 +5,7 @@ import ArchImage from '../ui/ArchImage.jsx';
 /**
  * ProjectCard — Single project grid card.
  * Follows design.md §4.3 and animations.md §5:
- * - Arch-framed screenshot on top (3.3, ~16:11 ratio).
+ * - Rounded-rectangle screenshot on top (3.3, ~16:11 ratio).
  * - Project name in Playfair Display fs-h2.
  * - Short rust-brown horizontal divider line under name.
  * - 1-2 line plain-language blurb in fs-small.
@@ -47,7 +47,7 @@ export default function ProjectCard({ project }) {
         aria-label={`View project details for ${project.name}`}
         className="group flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-transparent transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(38,34,32,0.15)] hover:bg-[var(--color-bg-alt)]/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
       >
-        {/* Arch-framed screenshot */}
+        {/* Rounded-rectangle screenshot */}
         <div className="w-full overflow-hidden">
           <ArchImage
             src={project.image}

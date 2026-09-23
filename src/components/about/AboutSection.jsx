@@ -8,7 +8,7 @@ import ArchImage from '../ui/ArchImage.jsx';
  * Follows design.md §4.2, content.md §3, and animations.md §3 & §4:
  *
  * Layout:
- * - Two-column layout on desktop (>1024px): text column left, arch-framed photo right.
+ * - Two-column layout on desktop (>1024px): text column left, rounded-rectangle photo right.
  * - Stacks to single column under 1024px with text first for optimal readability/SEO.
  * - Max width: 1200px, generous vertical padding (96-140px desktop, 56-72px mobile).
  *
@@ -137,7 +137,7 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* Right Column: Arch-framed Workspace / Dev Photo */}
+          {/* Right Column: Rounded-rectangle Workspace / Dev Photo */}
           <motion.div
             variants={photoVariants}
             initial="hidden"
