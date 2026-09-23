@@ -76,7 +76,8 @@
 
   /* Border radius */
   --radius-pill: 999px;
-  --radius-arch: 999px 999px 0 0;
+  --radius-frame: 16px;
+  --radius-arch: 16px;
   --radius-input: 12px;
 
   /* Shadows */

@@ -1,7 +1,7 @@
 /**
- * ArchImage — Reusable arch-topped image frame.
+ * ArchImage (ImageFrame) — Reusable rounded-rectangle image frame.
  * Follows design.md §3.3 & §2.4:
- * - Container with flat bottom/sides and semicircular top edge (`border-radius: 999px 999px 0 0`).
+ * - Container with rounded-rectangle shape (`border-radius: 16px` on all four corners).
  * - Background `--color-bg-alt` shows behind the image if loading or aspect varies.
  * - Image inside set to `object-fit: cover` with overflow hidden.
  *
@@ -28,7 +28,7 @@ export default function ArchImage({
     <div
       className={`relative w-full overflow-hidden bg-[var(--color-bg-alt)] shadow-xs ${className}`}
       style={{
-        borderRadius: '999px 999px 0 0',
+        borderRadius: '16px',
         aspectRatio: aspectRatio,
       }}
       {...props}
