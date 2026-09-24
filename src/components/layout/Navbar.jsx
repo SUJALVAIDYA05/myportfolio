@@ -18,12 +18,13 @@ export default function Navbar({ className = '' }) {
   // Active route checks:
   // "Projects" remains active on both /projects and any /projects/:slug child view
   const isProjectsActive = location.pathname.startsWith('/projects');
+  const isCertificationsActive = location.pathname.startsWith('/certifications');
   const isContactActive = location.pathname.startsWith('/contact');
 
   const getNavLinkClass = (isActive) =>
-    `relative inline-flex items-center min-h-[44px] px-3.5 py-2 font-body text-[0.9375rem] font-medium tracking-wider uppercase transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
+    `relative inline-flex items-center min-h-[44px] px-2.5 sm:px-3.5 py-2 font-body text-[0.875rem] sm:text-[0.9375rem] font-medium tracking-wider uppercase transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
       isActive
-        ? 'text-[var(--color-accent)] after:absolute after:bottom-1 after:left-3 after:right-3 after:h-[2px] after:bg-[var(--color-accent)] after:rounded-full'
+        ? 'text-[var(--color-accent)] after:absolute after:bottom-1 after:left-2.5 sm:after:left-3 after:right-2.5 sm:after:right-3 after:h-[2px] after:bg-[var(--color-accent)] after:rounded-full'
         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
     }`;
 
@@ -36,12 +37,18 @@ export default function Navbar({ className = '' }) {
         <Logo size={42} asLink to="/" />
 
         {/* Right: Navigation Links */}
-        <nav aria-label="Main Navigation" className="flex items-center gap-4 sm:gap-8">
+        <nav aria-label="Main Navigation" className="flex items-center gap-2 sm:gap-8">
           <NavLink
             to="/projects"
             className={({ isActive }) => getNavLinkClass(isActive || isProjectsActive)}
           >
             Projects
+          </NavLink>
+          <NavLink
+            to="/certifications"
+            className={({ isActive }) => getNavLinkClass(isActive || isCertificationsActive)}
+          >
+            Certifications
           </NavLink>
           <NavLink
             to="/contact"
