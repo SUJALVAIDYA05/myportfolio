@@ -28,6 +28,7 @@ export default function RectImage({
   fit = 'cover',
   priority = false,
   children,
+  style,
   ...props
 }) {
   const objectFitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
@@ -62,8 +63,9 @@ export default function RectImage({
     <div
       className={`relative w-full overflow-hidden bg-[var(--color-bg-alt)] shadow-xs rounded-[12px] ${className}`}
       style={{
-        borderRadius: '12px',
         aspectRatio: aspectRatio,
+        ...style,
+        borderRadius: '12px',
       }}
       {...props}
     >

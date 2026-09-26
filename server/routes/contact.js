@@ -45,10 +45,10 @@ router.post('/', async (req, res) => {
 
     return res.json({ success: true });
   } catch (err) {
-    console.error('Contact form endpoint error:', err);
+    console.error('Contact form error (full details):', err?.stack || err);
     return res.status(500).json({
       success: false,
-      error: 'Something went wrong processing your message. Please try again later.',
+      error: err?.message || 'Something went wrong processing your message. Please try again later.',
     });
   }
 });

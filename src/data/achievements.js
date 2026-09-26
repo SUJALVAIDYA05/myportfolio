@@ -18,6 +18,12 @@ const achievements = [
       '/images/achievements/hackarena-2k26/3.jpg', // solo photo with the cheque
       '/images/achievements/hackarena-2k26/4.jpg', // prize handover with faculty/judges
     ],
+    imageAlts: [
+      'Team Code Blooded working session in the lab during HackArena 2K26',
+      'Team Code Blooded holding the HackArena 2K26 1st Runner Up cheque',
+      'Sujal Vaidya solo photo with the HackArena 2K26 1st Runner Up cheque',
+      'Prize handover ceremony with faculty and judges at HackArena 2K26',
+    ],
   },
   {
     id: 'chakravyuha-vaibhav',
@@ -28,6 +34,10 @@ const achievements = [
     images: [
       '/images/achievements/chakravyuha/1.jpg', // on-stage award presentation
       '/images/achievements/chakravyuha/2.jpg', // receiving the certificate/memento
+    ],
+    imageAlts: [
+      'On-stage award presentation at Chakravyuha — Vaibhav',
+      'Sujal Vaidya receiving the 1st Prize certificate and memento at Chakravyuha',
     ],
   },
 ];

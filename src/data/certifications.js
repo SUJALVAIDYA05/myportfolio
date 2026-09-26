@@ -13,7 +13,7 @@ const certifications = [
     date: 'September 23, 2026',
     duration: '4 hours',
     certificateId: 'UC-2a73d416-533e-4427-82ac-b012a38a7cd8',
-    image: '/images/certifications/java-certificate.jpeg',
+    image: '/images/certifications/java-certificate.png',
   },
   {
     id: 'python-udemy',
@@ -22,7 +22,7 @@ const certifications = [
     date: 'July 4, 2024',
     duration: '5.5 hours',
     certificateId: 'UC-3fa05422-1559-40cb-8871-ee9c34d21334',
-    image: '/images/certifications/python-certificate.jpeg',
+    image: '/images/certifications/python-certificate.png',
   },
   {
     id: 'fullstack-bootcamp-udemy',
@@ -31,7 +31,7 @@ const certifications = [
     date: 'March 3, 2026',
     duration: '62 hours',
     certificateId: 'UC-b54f4dbb-065a-4114-88ce-0d98d7896ae1',
-    image: '/images/certifications/fullstack-bootcamp-certificate.jpeg',
+    image: '/images/certifications/fullstack-bootcamp-certificate.png',
   },
 ];
 

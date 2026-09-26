@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import ArchImage from '../ui/ArchImage.jsx';
+import RectImage from '../ui/RectImage.jsx';
 
 /**
  * ProjectDetailHeader — project detail page header.
@@ -8,7 +8,7 @@ import ArchImage from '../ui/ArchImage.jsx';
  * - Back link ("<- All Projects") to /projects
  * - Project title (--fs-h1, Playfair Display)
  * - Tagline / role summary tag (--color-text-secondary)
- * - Large hero screenshot with rounded-rectangle frame (border-radius: 16px via ArchImage)
+ * - Large hero screenshot with rounded-rectangle frame (border-radius: 12px via RectImage)
  * - Staggered entrance animations with prefers-reduced-motion fallback
  *
  * @param {Object} props
@@ -51,7 +51,7 @@ export default function ProjectDetailHeader({ project }) {
       <motion.div {...motionProps(0)}>
         <Link
           to="/projects"
-          className="inline-flex items-center gap-2 font-body text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200 mb-6 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          className="inline-flex items-center gap-2 font-body text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200 mb-6 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] min-h-[44px] py-2"
         >
           <span className="transition-transform duration-200 group-hover:-translate-x-1 font-body">
             &larr;
@@ -83,7 +83,7 @@ export default function ProjectDetailHeader({ project }) {
 
       {/* 4. Large Hero Screenshot */}
       <motion.div {...motionProps(0.2)} className="mt-8 sm:mt-10 w-full">
-        <ArchImage
+        <RectImage
           src={project.image}
           alt={`${project.name} — ${project.tagline}`}
           aspectRatio="16/9"

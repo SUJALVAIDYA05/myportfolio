@@ -2,9 +2,9 @@ import { NavLink, useLocation } from 'react-router-dom';
 import Logo from '../ui/Logo.jsx';
 
 /**
- * Persistent navigation bar — shown on /projects, /projects/:slug, /contact.
+ * Persistent navigation bar — shown on /projects, /projects/:slug, /certifications, /contact.
  * Follows design.md §3.2 & §5:
- * - Slim persistent nav bar: Logo (left, links to /) + text links "Projects" / "Contact" (right).
+ * - Slim persistent nav bar: Logo (left, links to /) + text links "Projects" / "Certifications" / "Contact" (right).
  * - Sans-serif, fs-small (0.9375rem), generous letter-spacing, uppercase.
  * - Active route gets an accent-colored underline (Projects remains active on /projects/:slug).
  * - Touch targets >= 44px, graceful mobile layout without hamburger menu.

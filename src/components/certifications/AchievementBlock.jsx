@@ -81,6 +81,7 @@ export default function AchievementBlock({ achievement, index = 0 }) {
         <div className="lg:col-span-7 flex justify-center">
           <Carousel
             images={achievement.images}
+            imageAlts={achievement.imageAlts}
             alt={achievement.competition}
             aspectRatio="3/2"
             className="w-full"

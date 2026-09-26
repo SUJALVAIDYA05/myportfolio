@@ -114,44 +114,17 @@ export default function MyProjectsSection() {
               My Projects
             </h2>
 
-            {/* Summary Paragraphs from content.md §4 */}
-            <div className="mt-6 sm:mt-8 space-y-4 text-[var(--color-text-primary)] font-body text-[var(--fs-body)] leading-relaxed max-w-[580px]">
-              <p className="m-0">
-                My project experience spans full-stack web development, AI-powered
-                applications, real-time systems, and intelligent document
-                processing. I have worked on building practical software solutions
-                that combine modern frontend and backend technologies with
-                databases, authentication, real-time communication, and AI
-                capabilities.
-              </p>
-              <p className="m-0">
-                My work includes developing a full-stack online reselling
-                platform with role-based access, real-time communication,
-                secure authentication, database-backed transactions, and
-                cloud-based image management. I have also developed a
-                milestone-based escrow platform focused on secure fund
-                management, mutual approvals, AI-assisted milestone generation
-                and dispute resolution, real-time mediation, and automated
-                invoicing.
-              </p>
-              <p className="m-0">
-                Alongside web applications, I have worked on an AI-powered
-                industrial safety system that uses computer vision for real-time
-                PPE compliance detection, QR-based employee identification,
-                result storage, reporting, and live safety analytics. I have also
-                explored Retrieval-Augmented Generation by developing a PDF
-                question-answering system that combines document extraction,
-                semantic embeddings, vector search, and large language models to
-                provide context-aware answers from uploaded documents.
-              </p>
-              <p className="m-0">
-                Together, these projects have given me hands-on experience in
-                designing and developing end-to-end applications while exploring
-                different areas of software engineering, including full-stack
-                development, database systems, real-time technologies, computer
-                vision, AI integration, and intelligent information retrieval.
-              </p>
-            </div>
+            {/* Condensed Summary Paragraph */}
+            <p className="mt-6 sm:mt-8 max-w-[580px] text-[var(--color-text-primary)] font-body text-[var(--fs-body)] leading-relaxed m-0">
+              My project work spans full-stack web development, AI-powered
+              applications, and intelligent document processing — from a
+              role-based reselling marketplace and a milestone-based escrow
+              platform with AI-assisted dispute resolution, to a computer-vision
+              system for real-time industrial safety monitoring and a RAG-based
+              PDF question-answering chatbot. Together these projects reflect
+              hands-on experience across databases, authentication, real-time
+              systems, and AI integration.
+            </p>
 
             {/* CTA Button: "See all projects" linking to /projects */}
             <motion.div
