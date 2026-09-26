@@ -4,7 +4,7 @@
  * read from this array — never hardcode project text inside page components.
  *
  * Shape is consistent plain JS objects — no TypeScript types.
- * See content.md §5 for all copy.
+ * See content.md §7 for all copy.
  */
 
 const projects = [
@@ -71,7 +71,7 @@ const projects = [
       'Dockerized deployment',
       'PostgreSQL + Prisma data layer',
     ],
-    liveUrl: null,
+    liveUrl: 'https://trust-ledger-frontend-blond.vercel.app/',
     githubUrl: null,
     image: '/images/projects/trustledger.jpg',
   },
@@ -99,7 +99,7 @@ const projects = [
       'Real-time updates via WebSockets',
     ],
     liveUrl: null,
-    githubUrl: 'https://github.com/SUJALVAIDYA05',
+    githubUrl: 'https://github.com/SUJALVAIDYA05/Industriguard-AI',
     image: '/images/projects/industriguard.jpg',
   },
   {
@@ -175,11 +175,11 @@ const projects = [
     summary:
       'The site you\u2019re currently on \u2014 designed to match a set of visual references pixel-for-pixel and built as a real React application, not a template.',
     overview:
-      "This portfolio was built to present Sujal's work with the same craft and attention to detail as the projects it showcases: a custom design system, a scroll-driven Intro/About experience, a dynamic project-template architecture, and a working Express-backed contact form.",
+      "This portfolio was built to present Sujal's work with the same craft and attention to detail as the projects it showcases: a custom design system, a scroll-driven Intro/About/My Projects/Certifications experience, a dynamic project-template architecture, and a working Express-backed contact form.",
     features: [
       'Custom design system (color, type, spacing tokens)',
-      'Scroll-revealed Intro \u2192 About experience on a single page',
-      'Data-driven project template powering all project detail pages',
+      'Scroll-revealed Intro → About → My Projects → Certifications experience on a single page',
+      'Data-driven project, certification, and achievement templates',
       'Working contact form with a standalone Express backend for email delivery',
     ],
     techStack: [

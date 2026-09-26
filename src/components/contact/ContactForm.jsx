@@ -56,18 +56,35 @@ export default function ContactForm({ className = '' }) {
 
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-      const response = await fetch(`${apiUrl}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim(),
-          company: formData.company, // honeypot value
-        }),
-      });
+      let response;
+      try {
+        response = await fetch(`${apiUrl}/api/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            message: formData.message.trim(),
+            company: formData.company, // honeypot value
+          }),
+        });
+      } catch {
+        // Fallback to relative endpoint proxied through Vite dev server
+        response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            message: formData.message.trim(),
+            company: formData.company,
+          }),
+        });
+      }
 
       const data = await response.json().catch(() => ({}));
 

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import ArchImage from '../ui/ArchImage.jsx';
+import RectImage from '../ui/RectImage.jsx';
 
 /**
  * ProjectCard — Single project grid card.
  * Follows design.md §4.3 and animations.md §5:
- * - Rounded-rectangle screenshot on top (3.3, ~16:11 ratio).
+ * - Rounded-rectangle screenshot on top (3.3, 16:10 ratio).
  * - Project name in Playfair Display fs-h2.
  * - Short rust-brown horizontal divider line under name.
  * - 1-2 line plain-language blurb in fs-small.
@@ -48,11 +48,11 @@ export default function ProjectCard({ project }) {
         className="group flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-transparent transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(38,34,32,0.15)] hover:bg-[var(--color-bg-alt)]/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
       >
         {/* Rounded-rectangle screenshot */}
-        <div className="w-full overflow-hidden">
-          <ArchImage
+        <div className="w-full overflow-hidden rounded-[12px]">
+          <RectImage
             src={project.image}
             alt={`${project.name} - ${project.tagline}`}
-            aspectRatio="16/11"
+            aspectRatio="16/10"
             className="w-full shadow-xs"
             imageClassName="group-hover:scale-103 transition-transform duration-300 ease-out"
           />

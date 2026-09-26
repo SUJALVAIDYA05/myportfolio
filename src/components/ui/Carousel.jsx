@@ -22,6 +22,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
  */
 export default function Carousel({
   images = [],
+  imageAlts = [],
   alt = 'Competition photo',
   aspectRatio = '3/2',
   className = '',
@@ -111,9 +112,13 @@ export default function Carousel({
     touchEndX.current = null;
   };
 
+  const currentAlt =
+    (imageAlts && imageAlts[currentIndex]) ||
+    `${alt} (photo ${currentIndex + 1} of ${total})`;
+
   return (
     <div
-      className={`w-full flex flex-col items-center ${className}`}
+      className={`w-full flex flex-col items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] rounded-[12px] ${className}`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
@@ -136,7 +141,7 @@ export default function Carousel({
           <motion.img
             key={`${currentIndex}-${currentSrc}`}
             src={currentSrc}
-            alt={`${alt} (photo ${currentIndex + 1} of ${total})`}
+            alt={currentAlt}
             onError={handleImageError}
             initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
             animate={{ opacity: 1 }}
@@ -218,7 +223,7 @@ export default function Carousel({
               aria-selected={currentIndex === idx}
               aria-label={`Go to photo ${idx + 1}`}
               onClick={() => handleDotClick(idx)}
-              className={`min-w-[28px] min-h-[28px] flex items-center justify-center transition-all duration-200 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] rounded-full`}
+              className={`min-w-[44px] min-h-[44px] flex items-center justify-center transition-all duration-200 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] rounded-full`}
             >
               <span
                 className={`block rounded-full transition-all duration-200 ${
