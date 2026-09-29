@@ -26,7 +26,7 @@ export default function ContactForm({ className = '' }) {
     company: '', // honeypot
   });
 
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
@@ -37,69 +37,59 @@ export default function ContactForm({ className = '' }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { name, email, message, company } = formData;
+
     // Client-side validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (!name.trim() || !email.trim() || !message.trim()) {
       setStatus('error');
       setErrorMessage('Please fill in all required fields.');
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email.trim())) {
+    if (!emailRegex.test(email.trim())) {
       setStatus('error');
       setErrorMessage('Please provide a valid email address.');
       return;
     }
 
-    setStatus('submitting');
+    setStatus('sending');
     setErrorMessage('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-      let response;
+      const base = import.meta.env.VITE_API_URL ?? ''; // empty = same origin (proxy / serverless)
+      const res = await fetch(`${base}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+          company,
+        }),
+      });
+
+      let data = {};
       try {
-        response = await fetch(`${apiUrl}/api/contact`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            message: formData.message.trim(),
-            company: formData.company, // honeypot value
-          }),
-        });
+        data = await res.json();
       } catch {
-        // Fallback to relative endpoint proxied through Vite dev server
-        response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            message: formData.message.trim(),
-            company: formData.company,
-          }),
-        });
+        /* non-JSON response */
       }
 
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data.success) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '', company: '' });
-      } else {
+      if (!res.ok || !data.success) {
+        console.error('Contact API failed:', res.status, data);
         setStatus('error');
         setErrorMessage(
           data.error ||
             'Something went wrong sending your message — please email me directly instead.'
         );
+        return;
       }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '', company: '' });
     } catch (err) {
-      console.error('Contact form submission error:', err);
+      console.error('Contact request failed (network or CORS):', err);
       setStatus('error');
       setErrorMessage(
         'Something went wrong sending your message — please email me directly instead.'
@@ -153,7 +143,7 @@ export default function ContactForm({ className = '' }) {
           placeholder="e.g. Maya Sharma"
           value={formData.name}
           onChange={handleChange}
-          disabled={status === 'submitting'}
+          disabled={status === 'sending' || status === 'submitting'}
           className="w-full px-4 sm:px-5 py-3.5 rounded-[12px] bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-body text-[var(--fs-body)] placeholder:text-[var(--color-text-secondary)]/50 focus:outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] transition-all duration-200 disabled:opacity-60"
         />
       </div>
@@ -175,7 +165,7 @@ export default function ContactForm({ className = '' }) {
           placeholder="e.g. maya@example.com"
           value={formData.email}
           onChange={handleChange}
-          disabled={status === 'submitting'}
+          disabled={status === 'sending' || status === 'submitting'}
           className="w-full px-4 sm:px-5 py-3.5 rounded-[12px] bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-body text-[var(--fs-body)] placeholder:text-[var(--color-text-secondary)]/50 focus:outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] transition-all duration-200 disabled:opacity-60"
         />
       </div>
@@ -196,7 +186,7 @@ export default function ContactForm({ className = '' }) {
           placeholder="Tell me about your project, idea, or just say hello..."
           value={formData.message}
           onChange={handleChange}
-          disabled={status === 'submitting'}
+          disabled={status === 'sending' || status === 'submitting'}
           className="w-full px-4 sm:px-5 py-3.5 rounded-[12px] bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-body text-[var(--fs-body)] placeholder:text-[var(--color-text-secondary)]/50 focus:outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] transition-all duration-200 resize-y min-h-[120px] disabled:opacity-60"
         />
       </div>
@@ -207,10 +197,10 @@ export default function ContactForm({ className = '' }) {
           type="submit"
           variant="primary"
           size="md"
-          disabled={status === 'submitting'}
+          disabled={status === 'sending' || status === 'submitting'}
           className="w-full sm:w-auto shadow-sm"
         >
-          {status === 'submitting' ? (
+          {status === 'sending' || status === 'submitting' ? (
             <span className="inline-flex items-center gap-2">
               <span className="w-4 h-4 border-2 border-[var(--color-text-inverse)] border-t-transparent rounded-full animate-spin shrink-0" />
               <span>Sending&hellip;</span>
