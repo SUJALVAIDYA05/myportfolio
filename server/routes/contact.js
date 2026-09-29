@@ -1,55 +1,26 @@
-import express from 'express';
-import { sendContactEmail } from '../lib/email.js';
+import express from "express";
+import { sendContactEmail } from "../lib/email.js";
 
 const router = express.Router();
 
-/**
- * POST /api/contact
- * Handles contact form submissions with honeypot bot defense and field validation.
- * See backend.md §3.
- */
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
+  const { name, email, message, company } = req.body || {};
+
+  if (company) return res.json({ success: true }); // honeypot hit: pretend success
+
+  if (!name?.trim() || !email?.trim() || !message?.trim()) {
+    return res.status(400).json({ success: false, error: "All fields are required." });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false, error: "Please provide a valid email." });
+  }
+
   try {
-    const { name, email, message, company } = req.body || {};
-
-    // 1. Honeypot check:
-    // If the hidden 'company' field is filled, it was filled by an automated bot.
-    // Silently succeed with 200 without sending email so bots don't learn.
-    if (company) {
-      console.log('[BOT BLOCKED] Honeypot triggered by submission.');
-      return res.json({ success: true });
-    }
-
-    // 2. Field validation:
-    if (!name?.trim() || !email?.trim() || !message?.trim()) {
-      return res.status(400).json({
-        success: false,
-        error: 'All fields (name, email, message) are required.',
-      });
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.trim())) {
-      return res.status(400).json({
-        success: false,
-        error: 'Please provide a valid email address.',
-      });
-    }
-
-    // 3. Send email:
-    await sendContactEmail({
-      name: name.trim(),
-      email: email.trim(),
-      message: message.trim(),
-    });
-
+    await sendContactEmail({ name: name.trim(), email: email.trim(), message: message.trim() });
     return res.json({ success: true });
   } catch (err) {
-    console.error('Contact form error (full details):', err?.stack || err);
-    return res.status(500).json({
-      success: false,
-      error: err?.message || 'Something went wrong processing your message. Please try again later.',
-    });
+    console.error("Contact email failed:", err); // <- the real reason shows in the server terminal
+    return res.status(502).json({ success: false, error: "Email service failed. Please try again." });
   }
 });
 
