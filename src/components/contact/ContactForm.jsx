@@ -70,18 +70,26 @@ export default function ContactForm({ className = '' }) {
       });
 
       let data = {};
+      let text = '';
       try {
-        data = await res.json();
+        text = await res.text();
+        data = JSON.parse(text);
       } catch {
         /* non-JSON response */
       }
 
       if (!res.ok || !data.success) {
-        console.error('Contact API failed:', res.status, data);
+        console.error('Contact API failed:', res.status, data || text);
         setStatus('error');
         setErrorMessage(
           data.error ||
-            'Something went wrong sending your message — please email me directly instead.'
+            (res.status === 404
+              ? 'Error 404: /api/contact not found. Ensure serverless functions or backend server is running.'
+              : res.status === 405
+              ? 'Error 405: Method Not Allowed. Static hosting does not support API routes.'
+              : res.status >= 500
+              ? `Server error ${res.status}: ${text ? text.slice(0, 100) : 'Check server logs.'}`
+              : `Request failed (status ${res.status}). Please email me directly instead.`)
         );
         return;
       }
@@ -92,7 +100,7 @@ export default function ContactForm({ className = '' }) {
       console.error('Contact request failed (network or CORS):', err);
       setStatus('error');
       setErrorMessage(
-        'Something went wrong sending your message — please email me directly instead.'
+        `Connection failed: ${err.message || 'Could not connect to server'}. Please email me directly instead.`
       );
     }
   };
